@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "152938374041",
+    "firebase_url": "https://starchart-ab5de.firebaseio.com",
+    "project_id": "starchart-ab5de",
+    "storage_bucket": "starchart-ab5de.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:152938374041:android:c6633b12d45d036db4a908",
+        "android_client_info": {
+          "package_name": "com.example.starchart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "152938374041-e21etpvjr31fd1db2f6bb0ckk1tt81j5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.starchart",
+            "certificate_hash": "a46e318ccbfaa09df2f54da50d1b4c49c2631541"
+          }
+        },
+        {
+          "client_id": "152938374041-l4i3s2bf8bsuagfdahhia6lolvkigdd5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCG7iB1okySASp58JSEeBR81ZaQ8zidmAE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "152938374041-l4i3s2bf8bsuagfdahhia6lolvkigdd5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
