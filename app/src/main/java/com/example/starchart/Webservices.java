@@ -1,6 +1,7 @@
 package com.example.starchart;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
@@ -48,8 +49,7 @@ public class Webservices {
                 .build();
         starService = retrofit.create(StarInterface.class);
         database = FirebaseDatabase.getInstance();
-        Stardb = database.getReference("Stars");
-
+        //Stardb = database.getReference();
     }
 
     public void createNewUser(String email, String password){
@@ -84,13 +84,14 @@ public class Webservices {
 
     }
 
-    public void dataWrite(MutableLiveData<List<Star>> s){
+    /*public void dataWrite(MutableLiveData<List<Star>> s){
 
-        Stardb.child("stars").setValue(s.getValue());
+        Stardb.child("star").setValue(s.getValue());
 
     }
+
     public void dataRead(){
-        Stardb.child("stars").addValueEventListener(new ValueEventListener() {
+        Stardb.child("star").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 stars.postValue((List<Star>) dataSnapshot.getValue(List.class));
@@ -101,14 +102,14 @@ public class Webservices {
                 System.out.println("A dataread was cancelled, Reason: "+databaseError.toException());
             }
         });
-    }
+    }*/
 
-    public void getStarList(MutableLiveData<List<Star>> starList){
+    public MutableLiveData<List<Star>> getStarList(){
         if(stars.getValue() == null){
             getStars();
-            dataRead();
+            //dataRead();
         }
-        starList = stars;
+        return stars;
     }
 
     public void getStars(){
@@ -119,7 +120,7 @@ public class Webservices {
                 if(response.isSuccessful()){
                     //System.out.println(response.code()+"\n"+response.message());
                     stars.postValue(response.body().getQuery().getStarList());
-                    System.out.println(stars.getValue().get(1).name);
+                    System.out.println("/n/nSee here: "+stars.getValue().get(1).name+"/n/n");
                 }else {
                     System.out.println("Call Succeded, but response failed.");
                 }

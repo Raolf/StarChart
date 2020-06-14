@@ -9,6 +9,6 @@ public class Main {
     public static void main(String[] args) {
         Webservices wb = new Webservices();
         MutableLiveData<List<Star>> l = new MutableLiveData<>();
-        wb.getStarList(l);
+        wb.getStarList();
     }
 }

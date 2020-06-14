@@ -7,8 +7,16 @@ import java.util.List;
 
 public class ListViewmodel extends ViewModel {
 
-    /*public MutableLiveData<List<Star>> fetchStars{
-        return
-    }*/
+    MutableLiveData<List<Star>> stars;
 
+    ListRepository repository = ListRepository.getInstance();
+
+    public void fetchList(){
+        stars = repository.getApiStars();
+    }
+
+    public MutableLiveData<List<Star>> getStars() {
+        fetchList();
+        return stars;
+    }
 }
