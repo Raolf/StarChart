@@ -32,7 +32,7 @@ import retrofit2.http.Path;
 
 public class Webservices {
 
-    String URL = "http://en.wikipedia.org/w/";
+    String URL = "https://en.wikipedia.org/w/";
     Retrofit retrofit;
     StarInterface starService;
     FirebaseDatabase database;
@@ -119,8 +119,8 @@ public class Webservices {
             public void onResponse(Call<ResponseObject> call, Response<ResponseObject> response) {
                 if(response.isSuccessful()){
                     //System.out.println(response.code()+"\n"+response.message());
-                    stars.postValue(response.body().getQuery().getStarList());
-                    System.out.println("/n/nSee here: "+stars.getValue().get(1).name+"/n/n");
+                    stars.setValue(response.body().getQuery().getStarList());
+                    System.out.println("/n/nSee here: "+(stars.getValue().get(1).name+"/n/n"));
                 }else {
                     System.out.println("Call Succeded, but response failed.");
                 }

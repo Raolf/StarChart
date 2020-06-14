@@ -1,8 +1,10 @@
 package com.example.starchart;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,23 +22,25 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.MyView
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
+        public RelativeLayout relativeLayout;
         public TextView textView;
-        public MyViewHolder(TextView v){
+        public MyViewHolder(RelativeLayout v, ListViewAdapter listViewAdapter){
             super(v);
-            textView = v;
+            textView = itemView.findViewById(R.id.Toxt);
+            relativeLayout = v;
         }
     }
 
     public ListViewAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
 
-        TextView v = (TextView) LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
-        MyViewHolder vh = new MyViewHolder(v);
+        RelativeLayout v = (RelativeLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
+        MyViewHolder vh = new MyViewHolder(v, this);
         return vh;
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.textView.setText(dataset.getValue().indexOf(position));
+        holder.textView.setText(dataset.getValue().get(position).getName());
     }
 
     @Override

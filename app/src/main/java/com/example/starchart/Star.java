@@ -23,4 +23,35 @@ public class Star implements Serializable {
         this.pageId = pageId;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public float getColor() {
+        return color;
+    }
+
+    public void setColor(float color) {
+        this.color = color;
+    }
+
+    public int getPageId() {
+        return pageId;
+    }
+
+    public void setPageId(int pageId) {
+        this.pageId = pageId;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }
