@@ -65,9 +65,9 @@ public class MainActivity extends AppCompatActivity {
             System.out.println("Text her: "+passText.getText().toString());
             if(!nameText.getText().toString().isEmpty() && !passText.getText().toString().isEmpty()){
                 if(lvm.getAuth().getCurrentUser() != null && lvm.getAuth().getCurrentUser().isEmailVerified()){
-                    Intent intent = new Intent(getBaseContext(), ListView.class);
+                    //Intent intent = new Intent(getBaseContext(), ListView.class);
                     lvm.getAuth().signOut();
-                    startActivity(intent);
+                    //startActivity(intent);
                 }
 
                 lvm.getAuth().signInWithEmailAndPassword(nameText.getText().toString(),passText.getText().toString()).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
