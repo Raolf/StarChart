@@ -1,6 +1,5 @@
 package com.example.starchart.ApiResponse;
 
-import com.example.starchart.Star;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

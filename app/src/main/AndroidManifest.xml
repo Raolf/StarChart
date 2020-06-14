@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".Views.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -22,11 +22,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ListView"
-            android:parentActivityName=".MainActivity">
+        <activity android:name=".Views.ListView"
+            android:parentActivityName=".Views.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                android:value=".Views.MainActivity"/>
         </activity>
 
     </application>

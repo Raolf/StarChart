@@ -1,33 +1,30 @@
-package com.example.starchart;
+package com.example.starchart.Views;
 
 import android.content.Context;
 import android.content.Intent;
+
+import com.example.starchart.ListViewmodel;
+import com.example.starchart.LocalDB.User;
+import com.example.starchart.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 
-import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.multidex.MultiDex;
 
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -38,21 +35,30 @@ public class MainActivity extends AppCompatActivity {
         MultiDex.install(this);
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        ListViewmodel lvm = new ListViewmodel();
+        ListViewmodel lvm = new ListViewmodel(getApplication());
 
         Button loginBut = findViewById(R.id.loginButton);
         Button signBut = findViewById(R.id.signButton);
         EditText nameText = findViewById(R.id.nameText);
         EditText passText = findViewById(R.id.passText);
         Switch remSwitch = findViewById(R.id.rememberSwitch);
+
+        lvm.getDUser().observe(this, new Observer<User>() {
+            @Override
+            public void onChanged(User user) {
+                if(user.isRemember()){
+                    nameText.setText(user.getUsername());
+                    passText.setText(user.getPassword());
+                }
+            }
+        }
+        );
+
 
         loginBut.setOnClickListener(view -> {
             System.out.println("Text her: "+nameText.getText().toString());
@@ -70,6 +76,9 @@ public class MainActivity extends AppCompatActivity {
                             FirebaseUser user;
                             user = lvm.getAuth().getCurrentUser();
                             if(user.isEmailVerified()){
+                                if(remSwitch.isChecked()){
+                                    lvm.saveUser(new User(nameText.getText().toString(),passText.getText().toString(),remSwitch.isChecked()));
+                                }
                                 Intent intent = new Intent(getBaseContext(), ListView.class);
                                 startActivity(intent);
                             } else if(!user.isEmailVerified()){
@@ -108,11 +117,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        lvm.getUser().observe(this, firebaseUser -> {
-            if(firebaseUser.isEmailVerified()){
-                if(remSwitch.isChecked()){
-                    lvm.
+        remSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(!isChecked){
+                    lvm.saveUser(new User("","",false));
                 }
+            }
+        });
+
+        /*lvm.getUser().observe(this, firebaseUser -> {
+            if(firebaseUser.isEmailVerified()){
                 Intent intent = new Intent(getBaseContext(), ListView.class);
                 startActivity(intent);
             } else if(!firebaseUser.isEmailVerified()){
@@ -121,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getBaseContext(),"Login failed. Have you verified your email?",Toast.LENGTH_SHORT).show();
                 passText.setText("");
             }
-        });
+        });*/
 
 
     }

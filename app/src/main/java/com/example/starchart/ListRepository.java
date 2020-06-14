@@ -1,8 +1,15 @@
 package com.example.starchart;
 
+import android.app.Application;
+import android.os.AsyncTask;
+
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.starchart.LocalDB.User;
+import com.example.starchart.LocalDB.UserDao;
+import com.example.starchart.LocalDB.UserDatabase;
+import com.example.starchart.ApiResponse.Star;
+import com.example.starchart.WebSources.Webservices;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
@@ -10,14 +17,18 @@ import java.util.List;
 public class ListRepository {
 
     private static ListRepository repo;
+    UserDao userDao;
+    User user;
 
-    public static ListRepository getInstance(){
+    public static ListRepository getInstance(Application application){
         if(repo == null){
-            repo = new ListRepository();
+            repo = new ListRepository(application);
         }
         return repo;
     }
-    private ListRepository(){
+    private ListRepository(Application application){
+        UserDatabase db = UserDatabase.getInstance(application.getApplicationContext());
+        userDao = db.userDao();
 
     }
 
@@ -40,9 +51,52 @@ public class ListRepository {
         return stars;
     }
     public void saveUser(User user){
-
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                userDao.delete(user);
+                userDao.insertUser(user);
+            }
+        });
     }
-    public User getUser(){
-        
+    public void getUser(MutableLiveData<User> u){
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                List<User> users = userDao.getAll();
+                if(users.isEmpty()){
+                    u.postValue(new User("","",false));
+                } else{
+                    u.postValue(users.get(0));
+                }
+
+            }
+        });
+    }
+
+    class InsertUserAsync extends AsyncTask<User,Void,Void>{
+        private UserDao userDao;
+
+        private void InsertUserAsync(UserDao userDao){
+            this.userDao = userDao;
+        }
+
+        @Override
+        protected Void doInBackground(User... users) {
+            userDao.insertUser(users[0]);
+            return null;
+        }
+    }
+    class ReadUserAsync extends AsyncTask<Void,Void,User>{
+        private UserDao userDao;
+
+        private void ReadUserAsync(UserDao userDao){
+            this.userDao = userDao;
+        }
+
+        @Override
+        protected User doInBackground(Void... voids) {
+            return userDao.getAll().get(0);
+        }
     }
 }

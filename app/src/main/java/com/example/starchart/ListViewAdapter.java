@@ -3,13 +3,14 @@ package com.example.starchart;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.starchart.ApiResponse.Star;
 
 import java.util.List;
 
@@ -24,6 +25,7 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ListVi
 
         public RelativeLayout relativeLayout;
         public TextView textView;
+        public int pageNR;
         public ListViewHolder(RelativeLayout v, ListViewAdapter listViewAdapter){
             super(v);
             textView = itemView.findViewById(R.id.Toxt);
@@ -41,6 +43,13 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ListVi
     @Override
     public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
         holder.textView.setText(dataset.getValue().get(position).getName());
+        holder.pageNR = dataset.getValue().get(position).getPageId();
+        holder.textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     @Override

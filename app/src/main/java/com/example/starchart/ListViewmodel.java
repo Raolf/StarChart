@@ -1,19 +1,28 @@
 package com.example.starchart;
 
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
+import android.app.Application;
 
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.MutableLiveData;
+
+import com.example.starchart.LocalDB.User;
+import com.example.starchart.ApiResponse.Star;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
-public class ListViewmodel extends ViewModel {
+public class ListViewmodel extends AndroidViewModel {
 
     MutableLiveData<List<Star>> stars;
     MutableLiveData<FirebaseUser> user = new MutableLiveData<>();
-    ListRepository repository = ListRepository.getInstance();
+    ListRepository repository;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+    public ListViewmodel(Application app){
+        super(app);
+        repository = ListRepository.getInstance(app);
+    }
 
     public FirebaseAuth getAuth() {
         return mAuth;
@@ -36,6 +45,15 @@ public class ListViewmodel extends ViewModel {
     }
 
     public MutableLiveData<FirebaseUser> getUser(){
+        return user;
+    }
+
+    public void saveUser(User user){
+        repository.saveUser(user);
+    }
+    public MutableLiveData<User> getDUser(){
+        MutableLiveData<User> user = new MutableLiveData<>();
+        repository.getUser(user);
         return user;
     }
 }
