@@ -13,33 +13,33 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.MyViewHolder> {
+public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ListViewHolder> {
     private MutableLiveData<List<Star>> dataset;
 
     public ListViewAdapter(MutableLiveData<List<Star>> dataset){
         this.dataset = dataset;
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class ListViewHolder extends RecyclerView.ViewHolder{
 
         public RelativeLayout relativeLayout;
         public TextView textView;
-        public MyViewHolder(RelativeLayout v, ListViewAdapter listViewAdapter){
+        public ListViewHolder(RelativeLayout v, ListViewAdapter listViewAdapter){
             super(v);
             textView = itemView.findViewById(R.id.Toxt);
             relativeLayout = v;
         }
     }
 
-    public ListViewAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
+    public ListViewAdapter.ListViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
 
         RelativeLayout v = (RelativeLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
-        MyViewHolder vh = new MyViewHolder(v, this);
+        ListViewHolder vh = new ListViewHolder(v, this);
         return vh;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
         holder.textView.setText(dataset.getValue().get(position).getName());
     }
 

@@ -49,6 +49,7 @@ public class Webservices {
                 .build();
         starService = retrofit.create(StarInterface.class);
         database = FirebaseDatabase.getInstance();
+        auth = FirebaseAuth.getInstance();
         //Stardb = database.getReference();
     }
 
@@ -59,7 +60,6 @@ public class Webservices {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         System.out.println("createUserWithEmail:success");
-                        //FirebaseUser user = mAuth.getCurrentUser();
                     } else {
                         System.out.println("createUserWithEmail:failure"+task.getException());
 
@@ -67,21 +67,22 @@ public class Webservices {
                 }
             });
     }
-    public void signIn(String email, String password){
-        auth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener((Executor) this, new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-                        System.out.println("signInWithEmail:success");
-                        FirebaseUser user = auth.getCurrentUser();
-                    } else {
-                        System.out.println("signInWithEmail:failure"+task.getException());
-                        currentUser = null;
-                    }
-                }
-            });
+    public void signIn(String email, String password, MutableLiveData<FirebaseUser> ldUser){
 
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener((Executor) this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    System.out.println("signInWithEmail:success");
+                    FirebaseUser user = auth.getCurrentUser();
+                    ldUser.setValue(user);
+                } else {
+                    System.out.println("signInWithEmail:failure"+task.getException());
+                    currentUser = null;
+                }
+            }
+        });
     }
 
     /*public void dataWrite(MutableLiveData<List<Star>> s){

@@ -15,5 +15,8 @@ public class User {
     @ColumnInfo(name = "password")
     String password;
 
+    @ColumnInfo(name = "remember")
+    boolean remember;
+
 
 }
