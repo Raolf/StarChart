@@ -1,4 +1,4 @@
-package com.example.starchart;
+package com.example.starchart.Model;
 
 import android.app.Application;
 import android.os.AsyncTask;
@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.starchart.LocalDB.User;
 import com.example.starchart.LocalDB.UserDao;
 import com.example.starchart.LocalDB.UserDatabase;
-import com.example.starchart.ApiResponse.Star;
+import com.example.starchart.Model.ApiResponse.Star;
 import com.example.starchart.WebSources.Webservices;
 import com.google.firebase.auth.FirebaseUser;
 

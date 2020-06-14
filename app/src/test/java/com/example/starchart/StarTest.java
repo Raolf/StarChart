@@ -1,6 +1,6 @@
 package com.example.starchart;
 
-import com.example.starchart.ApiResponse.Star;
+import com.example.starchart.Model.ApiResponse.Star;
 
 import org.junit.Test;
 import static org.junit.Assert.*;

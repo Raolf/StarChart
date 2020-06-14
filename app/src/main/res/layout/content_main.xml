@@ -13,6 +13,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Login:"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#F4F4F4"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -55,7 +58,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.403" />
+        app:layout_constraintVertical_bias="0.403"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#F4F4F4"
+        android:backgroundTint="#FFFFFF"/>
 
     <EditText
         android:id="@+id/passText"
@@ -67,7 +73,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#F4F4F4"
+        android:backgroundTint="#FFFFFF"/>
 
     <Switch
         android:id="@+id/rememberSwitch"
@@ -81,6 +90,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.665"
-        tools:checked="false" />
+        tools:checked="false"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#F4F4F4"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

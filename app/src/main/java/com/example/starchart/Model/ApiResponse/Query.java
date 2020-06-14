@@ -1,4 +1,4 @@
-package com.example.starchart.ApiResponse;
+package com.example.starchart.Model.ApiResponse;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

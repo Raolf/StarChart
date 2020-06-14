@@ -1,4 +1,4 @@
-package com.example.starchart;
+package com.example.starchart.Model;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.starchart.ApiResponse.Star;
+import com.example.starchart.Model.ApiResponse.Star;
+import com.example.starchart.R;
 
 import java.util.List;
 

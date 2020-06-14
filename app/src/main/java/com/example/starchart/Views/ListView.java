@@ -9,9 +9,9 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.starchart.ApiResponse.Star;
-import com.example.starchart.ListViewAdapter;
-import com.example.starchart.ListViewmodel;
+import com.example.starchart.Model.ApiResponse.Star;
+import com.example.starchart.Model.ListViewAdapter;
+import com.example.starchart.Model.ListViewmodel;
 import com.example.starchart.R;
 
 import java.util.List;

@@ -3,8 +3,8 @@ package com.example.starchart.WebSources;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.starchart.ApiResponse.ResponseObject;
-import com.example.starchart.ApiResponse.Star;
+import com.example.starchart.Model.ApiResponse.ResponseObject;
+import com.example.starchart.Model.ApiResponse.Star;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -128,10 +128,10 @@ public class Webservices {
 
     interface StarInterface{
 
-        @GET("api.php?action=query&list=categorymembers&cmtitle=Category:Stars_with_proper_names&format=json")
+        @GET("api.php?action=query&list=categorymembers&cmtitle=Category:Stars_with_proper_names&format=json&cmlimit=50")
         Call<ResponseObject> getStarList();
 
-        @GET("")
+        @GET("api.php?action=query&list=categorymembers&cmtitle=Category:Constructed_languages&format=json&cmlimit=90")
         Call<ResponseObject> getWeirdList();
 
         @GET()

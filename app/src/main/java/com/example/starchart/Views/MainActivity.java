@@ -3,7 +3,7 @@ package com.example.starchart.Views;
 import android.content.Context;
 import android.content.Intent;
 
-import com.example.starchart.ListViewmodel;
+import com.example.starchart.Model.ListViewmodel;
 import com.example.starchart.LocalDB.User;
 import com.example.starchart.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -54,18 +54,19 @@ public class MainActivity extends AppCompatActivity {
                 if(user.isRemember()){
                     nameText.setText(user.getUsername());
                     passText.setText(user.getPassword());
+                    remSwitch.setChecked(user.isRemember());
                 }
             }
         }
         );
 
-
         loginBut.setOnClickListener(view -> {
             System.out.println("Text her: "+nameText.getText().toString());
             System.out.println("Text her: "+passText.getText().toString());
             if(!nameText.getText().toString().isEmpty() && !passText.getText().toString().isEmpty()){
-                if(lvm.getAuth().getCurrentUser() != null){
+                if(lvm.getAuth().getCurrentUser() != null && lvm.getAuth().getCurrentUser().isEmailVerified()){
                     Intent intent = new Intent(getBaseContext(), ListView.class);
+                    lvm.getAuth().signOut();
                     startActivity(intent);
                 }
 
@@ -125,20 +126,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-        /*lvm.getUser().observe(this, firebaseUser -> {
-            if(firebaseUser.isEmailVerified()){
-                Intent intent = new Intent(getBaseContext(), ListView.class);
-                startActivity(intent);
-            } else if(!firebaseUser.isEmailVerified()){
-                firebaseUser.sendEmailVerification();
-            } else {
-                Toast.makeText(getBaseContext(),"Login failed. Have you verified your email?",Toast.LENGTH_SHORT).show();
-                passText.setText("");
-            }
-        });*/
-
-
     }
 
     @Override
